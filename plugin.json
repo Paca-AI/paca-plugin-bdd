@@ -1,0 +1,30 @@
+{
+  "id": "com.paca.bdd",
+  "displayName": "BDD Scenarios",
+  "description": "Adds Given/When/Then BDD acceptance criteria to tasks.",
+  "version": "0.1.0",
+  "permissions": ["db.read", "db.write", "events.subscribe"],
+  "backend": {
+    "eventSubscriptions": ["task.deleted"],
+    "routes": [
+      { "method": "GET",    "path": "/tasks/:taskId/bdd-scenarios" },
+      { "method": "POST",   "path": "/tasks/:taskId/bdd-scenarios" },
+      { "method": "GET",    "path": "/tasks/:taskId/bdd-scenarios/:scenarioId" },
+      { "method": "PATCH",  "path": "/tasks/:taskId/bdd-scenarios/:scenarioId" },
+      { "method": "DELETE", "path": "/tasks/:taskId/bdd-scenarios/:scenarioId" }
+    ]
+  },
+  "frontend": {
+    "remoteEntryUrl": "/plugins/com.paca.bdd/assets/remoteEntry.js",
+    "extensionPoints": [
+      {
+        "point": "task.detail.section",
+        "component": "BDDScenariosSection",
+        "order": 20
+      }
+    ]
+  },
+  "mcp": {
+    "remoteEntryUrl": "/plugins-mcp/com.paca.bdd/mcp.js"
+  }
+}
