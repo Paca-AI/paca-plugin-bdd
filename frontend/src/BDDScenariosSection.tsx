@@ -102,6 +102,13 @@ function ScenarioCard({
 	const [when, setWhen] = useState(scenario.when);
 	const [then, setThen] = useState(scenario.then);
 
+	useEffect(() => {
+		setTitleDraft(scenario.title);
+		setGiven(scenario.given);
+		setWhen(scenario.when);
+		setThen(scenario.then);
+	}, [scenario.id, scenario.title, scenario.given, scenario.when, scenario.then]);
+
 	const qKey = bddScenariosQueryOptions(projectId, taskId).queryKey;
 
 	const updateMut = useMutation({
