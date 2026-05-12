@@ -229,6 +229,9 @@ func (p *bddPlugin) updateScenario(req *plugin.Request, res *plugin.Response) {
 	}
 	// Collect which fields changed for the activity record.
 	var changedFields []string
+	if b.Title != nil && *b.Title != sc.str("title") {
+		changedFields = append(changedFields, "title")
+	}
 	if b.Given != nil && *b.Given != sc.str("given_text") {
 		changedFields = append(changedFields, "given")
 	}
