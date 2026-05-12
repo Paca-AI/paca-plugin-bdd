@@ -136,12 +136,18 @@ function ScenarioCard({
 			className="rounded-xl border border-border/25 bg-card/50 overflow-hidden"
 		>
 			{/* Header row */}
-			<div className="flex items-center gap-2 px-4 py-3 group/scenario">
+			<div
+				className="flex items-center gap-2 px-4 py-3 group/scenario cursor-pointer"
+				onClick={() => setExpanded((x) => !x)}
+			>
 				{/* Expand/collapse button */}
 				<button
 					type="button"
 					className="shrink-0 p-0 text-muted-foreground/70 cursor-pointer"
-					onClick={() => setExpanded((x) => !x)}
+					onClick={(e) => {
+						e.stopPropagation();
+						setExpanded((x) => !x);
+					}}
 					aria-expanded={expanded}
 					aria-label={expanded ? "Collapse scenario" : "Expand scenario"}
 				>
@@ -175,6 +181,7 @@ function ScenarioCard({
 								e.currentTarget.blur();
 							}
 						}}
+						onClick={(e) => e.stopPropagation()}
 						className="flex-1 bg-transparent text-[13px] font-semibold text-foreground outline-none"
 					/>
 				) : (
@@ -185,7 +192,8 @@ function ScenarioCard({
 							"flex-1 text-left text-[13px] font-semibold text-foreground truncate",
 							canEdit && "hover:cursor-text",
 						)}
-						onClick={() => {
+						onClick={(e) => {
+							e.stopPropagation();
 							if (!canEdit) return;
 							setExpanded(true);
 							setEditTitle(true);
@@ -202,9 +210,12 @@ function ScenarioCard({
 				{canEdit && (
 					<button
 						type="button"
-						onClick={() => deleteMut.mutate()}
+						onClick={(e) => {
+							e.stopPropagation();
+							deleteMut.mutate();
+						}}
 						disabled={deleteMut.isPending}
-						className="opacity-0 group-hover/scenario:opacity-100 ml-1 shrink-0 rounded-md p-1 text-muted-foreground/50 hover:text-destructive hover:bg-destructive/10 transition-all duration-150"
+						className="ml-1 shrink-0 rounded-md p-1 text-muted-foreground/50 hover:text-destructive hover:bg-destructive/5 transition-all duration-150"
 						aria-label="Delete scenario"
 					>
 						<Trash2 className="size-3.5" />
