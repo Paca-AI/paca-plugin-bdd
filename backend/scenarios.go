@@ -111,7 +111,7 @@ func (p *bddPlugin) createScenario(req *plugin.Request, res *plugin.Response) {
 		UpdatedAt: now,
 	}
 	plugin.RecordActivity(taskID, projectID, req.Caller.UserID, "task.bdd_scenario.created",
-		map[string]any{"title": b.Title})
+		map[string]any{"title": b.Title, "_description": "added BDD scenario: \"" + b.Title + "\""})
 	created(res, scenario)
 }
 
@@ -242,7 +242,7 @@ func (p *bddPlugin) updateScenario(req *plugin.Request, res *plugin.Response) {
 		changedFields = append(changedFields, "then")
 	}
 	plugin.RecordActivity(taskID, projectID, req.Caller.UserID, "task.bdd_scenario.updated",
-		map[string]any{"title": updTitle, "changes": changedFields})
+		map[string]any{"title": updTitle, "changes": changedFields, "_description": "updated BDD scenario: \"" + updTitle + "\""})
 	ok(res, bddScenario{
 		ID:        scenarioID,
 		TaskID:    taskID,
@@ -296,7 +296,7 @@ func (p *bddPlugin) deleteScenario(req *plugin.Request, res *plugin.Response) {
 		return
 	}
 	plugin.RecordActivity(taskID, projectID, req.Caller.UserID, "task.bdd_scenario.deleted",
-		map[string]any{"title": scenarioTitle})
+		map[string]any{"title": scenarioTitle, "_description": "removed BDD scenario: \"" + scenarioTitle + "\""})
 	res.NoContent()
 }
 
