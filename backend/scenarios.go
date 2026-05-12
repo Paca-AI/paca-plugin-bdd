@@ -110,6 +110,8 @@ func (p *bddPlugin) createScenario(req *plugin.Request, res *plugin.Response) {
 		CreatedAt: now,
 		UpdatedAt: now,
 	}
+	plugin.RecordActivity(taskID, projectID, req.Caller.UserID, "task.bdd_scenario.created",
+		map[string]any{"title": b.Title})
 	created(res, scenario)
 }
 
@@ -225,6 +227,19 @@ func (p *bddPlugin) updateScenario(req *plugin.Request, res *plugin.Response) {
 		res.Error(404, "bdd scenario not found")
 		return
 	}
+	// Collect which fields changed for the activity record.
+	var changedFields []string
+	if b.Given != nil && *b.Given != sc.str("given_text") {
+		changedFields = append(changedFields, "given")
+	}
+	if b.When != nil && *b.When != sc.str("when_text") {
+		changedFields = append(changedFields, "when")
+	}
+	if b.Then != nil && *b.Then != sc.str("then_text") {
+		changedFields = append(changedFields, "then")
+	}
+	plugin.RecordActivity(taskID, projectID, req.Caller.UserID, "task.bdd_scenario.updated",
+		map[string]any{"title": updTitle, "changes": changedFields})
 	ok(res, bddScenario{
 		ID:        scenarioID,
 		TaskID:    taskID,
@@ -247,6 +262,23 @@ func (p *bddPlugin) deleteScenario(req *plugin.Request, res *plugin.Response) {
 		return
 	}
 
+	// Fetch title before deletion for the activity record.
+	titleResult, err := p.db.Query(
+		`SELECT title FROM bdd_scenarios WHERE id = $1 AND task_id = $2`,
+		scenarioID, taskID,
+	)
+	if err != nil {
+		p.log.Error("deleteScenario title fetch: " + err.Error())
+		res.Error(500, "failed to delete bdd scenario")
+		return
+	}
+	if len(titleResult.Rows) == 0 {
+		res.Error(404, "bdd scenario not found")
+		return
+	}
+	scenarioTitleSC := newRowScanner(titleResult.Columns, titleResult.Rows[0])
+	scenarioTitle := scenarioTitleSC.str("title")
+
 	affected, err := p.db.Exec(
 		`DELETE FROM bdd_scenarios WHERE id = $1 AND task_id = $2`,
 		scenarioID, taskID,
@@ -260,6 +292,8 @@ func (p *bddPlugin) deleteScenario(req *plugin.Request, res *plugin.Response) {
 		res.Error(404, "bdd scenario not found")
 		return
 	}
+	plugin.RecordActivity(taskID, projectID, req.Caller.UserID, "task.bdd_scenario.deleted",
+		map[string]any{"title": scenarioTitle})
 	res.NoContent()
 }
 
