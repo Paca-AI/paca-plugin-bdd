@@ -1,5 +1,6 @@
 import { PluginApiClient } from "@paca-ai/plugin-sdk-react";
 import { useMemo } from "react";
+import type { BDDScenario } from "../types";
 
 const PLUGIN_ID = "com.paca.bdd";
 
@@ -19,14 +20,14 @@ export function useBddApi(projectId: string) {
 export function bddScenariosQueryOptions(projectId: string, taskId: string) {
   return {
     queryKey: ["plugin", PLUGIN_ID, "bdd-scenarios", projectId, taskId] as const,
-    queryFn: async () => {
+    queryFn: async (): Promise<BDDScenario[]> => {
       const api = new PluginApiClient({
         baseUrl: `${window.location.origin}/api/v1`,
         projectId,
         fetch: (url, init) =>
           window.fetch(url, { ...init, credentials: "include" }),
       });
-      return api.pluginGet(PLUGIN_ID, `/tasks/${taskId}/bdd-scenarios`);
+      return api.pluginGet<BDDScenario[]>(PLUGIN_ID, `/tasks/${taskId}/bdd-scenarios`);
     },
   };
 }
