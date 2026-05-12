@@ -355,7 +355,7 @@ function NewScenarioForm({
 function BDDScenariosSectionInner({
 	projectId,
 	taskId,
-	canEdit = true,
+	canEdit = false,
 }: BDDSectionProps) {
 	const [adding, setAdding] = useState(false);
 
