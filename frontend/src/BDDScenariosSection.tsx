@@ -124,8 +124,9 @@ function ScenarioCard({
 
 	const flushClause = (field: "given" | "when" | "then", val: string) => {
 		const original = scenario[field];
-		if (val.trim() !== original.trim()) {
-			updateMut.mutate({ [field]: val });
+		const normalized = val.trim();
+		if (normalized !== original.trim()) {
+			updateMut.mutate({ [field]: normalized });
 		}
 	};
 
