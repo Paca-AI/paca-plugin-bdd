@@ -137,7 +137,7 @@ function ScenarioCard({
 		>
 			{/* Header row */}
 			<div
-				className="flex items-center gap-2 px-4 py-3 group/scenario cursor-pointer"
+				className="flex items-center gap-2 px-4 py-3 cursor-pointer"
 				onClick={() => setExpanded((x) => !x)}
 			>
 				{/* Expand/collapse button */}
