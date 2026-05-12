@@ -9,12 +9,12 @@ import {
 } from "lucide-react";
 import { type CSSProperties, useEffect, useRef, useState } from "react";
 import {
-	type BDDScenario,
 	bddScenariosQueryOptions,
 	createBDDScenario,
 	deleteBDDScenario,
 	updateBDDScenario,
 } from "./lib/interaction-api";
+import type { BDDScenario } from "./types";
 import { cn } from "./lib/utils";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
