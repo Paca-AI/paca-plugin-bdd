@@ -2,16 +2,76 @@
   "id": "com.paca.bdd",
   "displayName": "BDD Scenarios",
   "description": "Adds Given/When/Then BDD acceptance criteria to tasks.",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "permissions": ["db.read", "db.write", "events.subscribe"],
   "backend": {
     "eventSubscriptions": ["task.deleted"],
     "routes": [
-      { "method": "GET",    "path": "/tasks/:taskId/bdd-scenarios" },
-      { "method": "POST",   "path": "/tasks/:taskId/bdd-scenarios" },
-      { "method": "GET",    "path": "/tasks/:taskId/bdd-scenarios/:scenarioId" },
-      { "method": "PATCH",  "path": "/tasks/:taskId/bdd-scenarios/:scenarioId" },
-      { "method": "DELETE", "path": "/tasks/:taskId/bdd-scenarios/:scenarioId" }
+      {
+        "method": "GET",
+        "path": "/tasks/:taskId/bdd-scenarios",
+        "middlewares": [
+          { "name": "optionalAuthn" },
+          { "name": "requireFreshPassword" },
+          {
+            "name": "requirePermissions",
+            "scope": "project",
+            "permissions": ["tasks.read"]
+          }
+        ]
+      },
+      {
+        "method": "POST",
+        "path": "/tasks/:taskId/bdd-scenarios",
+        "middlewares": [
+          { "name": "optionalAuthn" },
+          { "name": "requireFreshPassword" },
+          {
+            "name": "requirePermissions",
+            "scope": "project",
+            "permissions": ["tasks.write"]
+          }
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/tasks/:taskId/bdd-scenarios/:scenarioId",
+        "middlewares": [
+          { "name": "optionalAuthn" },
+          { "name": "requireFreshPassword" },
+          {
+            "name": "requirePermissions",
+            "scope": "project",
+            "permissions": ["tasks.read"]
+          }
+        ]
+      },
+      {
+        "method": "PATCH",
+        "path": "/tasks/:taskId/bdd-scenarios/:scenarioId",
+        "middlewares": [
+          { "name": "optionalAuthn" },
+          { "name": "requireFreshPassword" },
+          {
+            "name": "requirePermissions",
+            "scope": "project",
+            "permissions": ["tasks.write"]
+          }
+        ]
+      },
+      {
+        "method": "DELETE",
+        "path": "/tasks/:taskId/bdd-scenarios/:scenarioId",
+        "middlewares": [
+          { "name": "optionalAuthn" },
+          { "name": "requireFreshPassword" },
+          {
+            "name": "requirePermissions",
+            "scope": "project",
+            "permissions": ["tasks.write"]
+          }
+        ]
+      }
     ]
   },
   "frontend": {
