@@ -27,7 +27,7 @@ export function bddScenariosQueryOptions(projectId: string, taskId: string) {
         fetch: (url, init) =>
           window.fetch(url, { ...init, credentials: "include" }),
       });
-      return api.pluginGet<BDDScenario[]>(PLUGIN_ID, `/tasks/${taskId}/bdd-scenarios`);
+      return api.pluginGet<BDDScenario[]>(PLUGIN_ID, `/projects/${projectId}/tasks/${taskId}/bdd-scenarios`);
     },
   };
 }
@@ -48,7 +48,7 @@ export async function createBDDScenario(
     fetch: (url, init) =>
       window.fetch(url, { ...init, credentials: "include" }),
   });
-  return api.pluginPost(PLUGIN_ID, `/tasks/${taskId}/bdd-scenarios`, data);
+  return api.pluginPost(PLUGIN_ID, `/projects/${projectId}/tasks/${taskId}/bdd-scenarios`, data);
 }
 
 export async function updateBDDScenario(
@@ -68,7 +68,7 @@ export async function updateBDDScenario(
     fetch: (url, init) =>
       window.fetch(url, { ...init, credentials: "include" }),
   });
-  return api.pluginPatch(PLUGIN_ID, `/tasks/${taskId}/bdd-scenarios/${scenarioId}`, data);
+  return api.pluginPatch(PLUGIN_ID, `/projects/${projectId}/tasks/${taskId}/bdd-scenarios/${scenarioId}`, data);
 }
 
 export async function deleteBDDScenario(
@@ -82,5 +82,5 @@ export async function deleteBDDScenario(
     fetch: (url, init) =>
       window.fetch(url, { ...init, credentials: "include" }),
   });
-  return api.pluginDelete(PLUGIN_ID, `/tasks/${taskId}/bdd-scenarios/${scenarioId}`);
+  return api.pluginDelete(PLUGIN_ID, `/projects/${projectId}/tasks/${taskId}/bdd-scenarios/${scenarioId}`);
 }

@@ -9,7 +9,7 @@
     "routes": [
       {
         "method": "GET",
-        "path": "/tasks/:taskId/bdd-scenarios",
+        "path": "/projects/:projectId/tasks/:taskId/bdd-scenarios",
         "middlewares": [
           { "name": "optionalAuthn" },
           { "name": "requireFreshPassword" },
@@ -22,7 +22,7 @@
       },
       {
         "method": "POST",
-        "path": "/tasks/:taskId/bdd-scenarios",
+        "path": "/projects/:projectId/tasks/:taskId/bdd-scenarios",
         "middlewares": [
           { "name": "optionalAuthn" },
           { "name": "requireFreshPassword" },
@@ -35,7 +35,7 @@
       },
       {
         "method": "GET",
-        "path": "/tasks/:taskId/bdd-scenarios/:scenarioId",
+        "path": "/projects/:projectId/tasks/:taskId/bdd-scenarios/:scenarioId",
         "middlewares": [
           { "name": "optionalAuthn" },
           { "name": "requireFreshPassword" },
@@ -48,7 +48,7 @@
       },
       {
         "method": "PATCH",
-        "path": "/tasks/:taskId/bdd-scenarios/:scenarioId",
+        "path": "/projects/:projectId/projects/:projectId/tasks/:taskId/bdd-scenarios/:scenarioId",
         "middlewares": [
           { "name": "optionalAuthn" },
           { "name": "requireFreshPassword" },
@@ -61,7 +61,7 @@
       },
       {
         "method": "DELETE",
-        "path": "/tasks/:taskId/bdd-scenarios/:scenarioId",
+        "path": "/projects/:projectId/tasks/:taskId/bdd-scenarios/:scenarioId",
         "middlewares": [
           { "name": "optionalAuthn" },
           { "name": "requireFreshPassword" },
