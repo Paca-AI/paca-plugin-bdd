@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	plugin "github.com/Paca-AI/plugin-sdk-go"
-	"github.com/google/uuid"
 )
 
 // ── Domain types ──────────────────────────────────────────────────────────────
@@ -88,18 +87,22 @@ func (p *bddPlugin) createScenario(req *plugin.Request, res *plugin.Response) {
 		return
 	}
 
-	id := uuid.New().String()
 	now := nowStr()
-	_, err = p.db.Exec(
-		`INSERT INTO bdd_scenarios (id, task_id, title, given_text, when_text, then_text, created_at, updated_at)
-		 VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-		id, taskID, b.Title, b.Given, b.When, b.Then, now, now,
+	inserted, err := p.db.Query(
+		`INSERT INTO bdd_scenarios (task_id, title, given_text, when_text, then_text, created_at, updated_at)
+		 VALUES ($1, $2, $3, $4, $5, $6, $7)
+		 RETURNING id`,
+		taskID, b.Title, b.Given, b.When, b.Then, now, now,
 	)
-	if err != nil {
-		p.log.Error("createScenario insert: " + err.Error())
+	if err != nil || len(inserted.Rows) == 0 {
+		if err != nil {
+			p.log.Error("createScenario insert: " + err.Error())
+		}
 		res.Error(500, "failed to create bdd scenario")
 		return
 	}
+	idSC := newRowScanner(inserted.Columns, inserted.Rows[0])
+	id := idSC.str("id")
 	scenario := bddScenario{
 		ID:        id,
 		TaskID:    taskID,
