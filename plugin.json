@@ -48,7 +48,7 @@
       },
       {
         "method": "PATCH",
-        "path": "/projects/:projectId/projects/:projectId/tasks/:taskId/bdd-scenarios/:scenarioId",
+        "path": "/projects/:projectId/tasks/:taskId/bdd-scenarios/:scenarioId",
         "middlewares": [
           { "name": "optionalAuthn" },
           { "name": "requireFreshPassword" },
