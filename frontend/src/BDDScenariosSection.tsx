@@ -58,7 +58,7 @@ function ClauseRow({
 		<div className="flex gap-2.5 items-start">
 			<span
 				className={cn(
-					"mt-0.75 shrink-0 rounded px-1.5 py-0.5 text-[9px] font-bold tracking-wider uppercase",
+					"mt-0.75 shrink-0 rounded px-1.5 py-0.5 text-xs font-bold tracking-wider uppercase",
 					color,
 				)}
 			>
@@ -72,7 +72,7 @@ function ClauseRow({
 				disabled={disabled}
 				rows={1}
 				placeholder={placeholder}
-				className="flex-1 min-h-7 resize-none bg-transparent text-[12.5px] leading-relaxed text-foreground/90 outline-none placeholder:text-muted-foreground/40 disabled:opacity-60 focus:placeholder:text-muted-foreground/60 transition-colors py-0.5"
+				className="flex-1 min-h-7 resize-none bg-transparent text-sm leading-relaxed text-foreground/90 outline-none placeholder:text-muted-foreground/40 disabled:opacity-60 focus:placeholder:text-muted-foreground/60 transition-colors py-0.5"
 				style={{ fieldSizing: "content" } as CSSProperties}
 			/>
 		</div>
@@ -182,14 +182,14 @@ function ScenarioCard({
 							}
 						}}
 						onClick={(e) => e.stopPropagation()}
-						className="flex-1 bg-transparent text-[13px] font-semibold text-foreground outline-none"
+						className="flex-1 bg-transparent text-sm font-semibold text-foreground outline-none"
 					/>
 				) : (
 					<button
 						type="button"
 						disabled={!canEdit}
 						className={cn(
-							"flex-1 text-left text-[13px] font-semibold text-foreground truncate",
+							"flex-1 text-left text-sm font-semibold text-foreground truncate",
 							canEdit && "hover:cursor-text",
 						)}
 						onClick={(e) => {
@@ -309,7 +309,7 @@ function NewScenarioForm({
 				value={title}
 				onChange={(e) => setTitle(e.target.value)}
 				placeholder="Scenario title…"
-				className="w-full bg-transparent text-[13px] font-semibold text-foreground outline-none placeholder:text-muted-foreground/50 focus:placeholder:text-muted-foreground/70 transition-colors"
+				className="w-full bg-transparent text-sm font-semibold text-foreground outline-none placeholder:text-muted-foreground/50 focus:placeholder:text-muted-foreground/70 transition-colors"
 				onKeyDown={(e) => {
 					if (e.key === "Enter" && canSave) createMut.mutate();
 					if (e.key === "Escape") onDone();
@@ -344,7 +344,7 @@ function NewScenarioForm({
 				<button
 					type="button"
 					onClick={onDone}
-					className="text-[11px] font-semibold text-muted-foreground/70 hover:text-foreground px-2.5 py-1.5 rounded-lg hover:bg-muted/40 transition-all duration-150"
+					className="text-xs font-semibold text-muted-foreground/70 hover:text-foreground px-2.5 py-1.5 rounded-lg hover:bg-muted/40 transition-all duration-150"
 				>
 					Cancel
 				</button>
@@ -352,7 +352,7 @@ function NewScenarioForm({
 					type="button"
 					onClick={() => createMut.mutate()}
 					disabled={!canSave}
-					className="text-[11px] font-semibold px-2.5 py-1.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-40 transition-all duration-150"
+					className="text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-40 transition-all duration-150"
 				>
 					{createMut.isPending ? "Creating…" : "Create scenario"}
 				</button>
@@ -378,10 +378,10 @@ function BDDScenariosSectionInner({
 		<div className="space-y-3">
 			{/* Section heading */}
 			<div className="flex items-center justify-between">
-				<h3 className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground/70 flex items-center gap-2">
+				<h3 className="text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground/70 flex items-center gap-2">
 					<span>BDD Scenarios</span>
 					{scenarios.length > 0 && (
-						<span className="font-bold tabular-nums rounded-full bg-muted/50 px-1.5 py-0.5 text-[10px]">
+						<span className="font-bold tabular-nums rounded-full bg-muted/50 px-1.5 py-0.5 text-xs">
 							{scenarios.length}
 						</span>
 					)}
@@ -392,7 +392,7 @@ function BDDScenariosSectionInner({
 					<button
 						type="button"
 						onClick={() => setAdding(true)}
-						className="flex items-center gap-1.5 rounded-lg bg-muted/40 text-muted-foreground/80 hover:bg-muted/60 hover:text-foreground px-2.5 py-1.5 text-[11px] font-semibold transition-all duration-150"
+						className="flex items-center gap-1.5 rounded-lg bg-muted/40 text-muted-foreground/80 hover:bg-muted/60 hover:text-foreground px-2.5 py-1.5 text-xs font-semibold transition-all duration-150"
 					>
 						<Plus className="size-3" />
 						Add scenario
@@ -404,7 +404,7 @@ function BDDScenariosSectionInner({
 			{isLoading ? (
 				<div className="flex items-center gap-3 px-1 py-3 text-muted-foreground/45">
 					<FlaskConical className="size-4 opacity-50" />
-					<p className="text-[13px] italic">Loading…</p>
+					<p className="text-sm italic">Loading…</p>
 				</div>
 			) : scenarios.length > 0 ? (
 				<div className="space-y-2">
@@ -422,7 +422,7 @@ function BDDScenariosSectionInner({
 				!adding && (
 					<div className="flex items-center gap-3 px-1 py-3 text-muted-foreground/45">
 						<FlaskConical className="size-4 opacity-70" />
-						<p className="text-[13px] italic">No BDD scenarios yet</p>
+						<p className="text-sm italic">No BDD scenarios yet</p>
 					</div>
 				)
 			)}
