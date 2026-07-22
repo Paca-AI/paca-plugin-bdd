@@ -86,5 +86,9 @@
   },
   "mcp": {
     "remoteEntryUrl": "/plugins-mcp/com.paca.bdd/mcp.js"
+  },
+  "skills": {
+    "baseUrl": "/plugins-skills/com.paca.bdd",
+    "names": ["paca-bdd-scenarios"]
   }
 }
