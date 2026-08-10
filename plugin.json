@@ -2,8 +2,8 @@
   "id": "com.paca.bdd",
   "displayName": "BDD Scenarios",
   "description": "Adds Given/When/Then BDD acceptance criteria to tasks.",
-  "version": "0.3.2",
-  "minCoreVersion": "v0.11.2",
+  "version": "0.3.3",
+  "minCoreVersion": "v0.12.2",
   "permissions": ["db.read", "db.write", "events.subscribe"],
   "backend": {
     "eventSubscriptions": ["task.deleted"],
@@ -86,7 +86,8 @@
     ]
   },
   "mcp": {
-    "remoteEntryUrl": "/plugins-mcp/com.paca.bdd/mcp.js"
+    "remoteEntryUrl": "/plugins-mcp/com.paca.bdd/mcp.js",
+    "toolContextHooks": ["get_task"]
   },
   "skills": {
     "baseUrl": "/plugins-skills/com.paca.bdd",
