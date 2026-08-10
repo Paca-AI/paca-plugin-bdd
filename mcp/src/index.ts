@@ -302,6 +302,34 @@ const entry: PluginMCPEntry = {
 			return errorResult(`Tool ${name} failed: ${message}`);
 		}
 	},
+
+	async getToolContext(
+		toolId: string,
+		args: Record<string, unknown>,
+		context: PluginMCPContext,
+	) {
+		if (toolId !== "get_task") return null;
+		const { projectId, taskId } = args as { projectId: string; taskId: string };
+
+		const api = new PluginAPIClient(context);
+		try {
+			const scenarios = await api.pluginGet<BDDScenario[]>(
+				`projects/${projectId}/tasks/${taskId}/bdd-scenarios`,
+			);
+			if (scenarios.length === 0) return null;
+
+			const lines = [
+				"## BDD Scenarios",
+				"",
+				...scenarios.map((s) => `- ${s.title}`),
+			];
+			return lines.join("\n");
+		} catch {
+			// Best-effort enrichment — a transient failure here should not
+			// break the get_task response for the AI client.
+			return null;
+		}
+	},
 };
 
 export default entry;
