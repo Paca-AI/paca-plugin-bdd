@@ -90,8 +90,8 @@ cd backend
 # Run tests
 go test ./...
 
-# Build WASM (requires Go 1.24+)
-GOOS=wasip1 GOARCH=wasm go build -o ../dist/backend.wasm .
+# Build WASM (requires TinyGo — see https://tinygo.org/getting-started/install/)
+tinygo build -target=wasip1 -buildmode=c-shared -o ../dist/backend.wasm .
 ```
 
 ### Frontend

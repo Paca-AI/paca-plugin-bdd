@@ -2,8 +2,8 @@
   "id": "com.paca.bdd",
   "displayName": "BDD Scenarios",
   "description": "Adds Given/When/Then BDD acceptance criteria to tasks.",
-  "version": "0.3.3",
-  "minCoreVersion": "v0.12.2",
+  "version": "0.3.4",
+  "minCoreVersion": "v0.13.3",
   "permissions": ["db.read", "db.write", "events.subscribe"],
   "backend": {
     "eventSubscriptions": ["task.deleted"],
