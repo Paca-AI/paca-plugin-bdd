@@ -75,13 +75,13 @@ func (p *bddPlugin) createScenario(req *plugin.Request, res *plugin.Response) {
 		return
 	}
 
-	type body struct {
+	type createScenarioBody struct {
 		Title string `json:"title"`
 		Given string `json:"given"`
 		When  string `json:"when"`
 		Then  string `json:"then"`
 	}
-	b, err := plugin.JSONBody[body](req)
+	b, err := plugin.JSONBody[createScenarioBody](req)
 	if err != nil || b.Title == "" {
 		res.Error(400, "title is required")
 		return
@@ -157,13 +157,13 @@ func (p *bddPlugin) updateScenario(req *plugin.Request, res *plugin.Response) {
 		return
 	}
 
-	type body struct {
+	type updateScenarioBody struct {
 		Title *string `json:"title"`
 		Given *string `json:"given"`
 		When  *string `json:"when"`
 		Then  *string `json:"then"`
 	}
-	b, err := plugin.JSONBody[body](req)
+	b, err := plugin.JSONBody[updateScenarioBody](req)
 	if err != nil {
 		res.Error(400, "invalid request body")
 		return
