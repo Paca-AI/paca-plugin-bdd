@@ -2,8 +2,8 @@
   "id": "com.paca.bdd",
   "displayName": "BDD Scenarios",
   "description": "Adds Given/When/Then BDD acceptance criteria to tasks.",
-  "version": "0.3.5",
-  "minCoreVersion": "v0.13.3",
+  "version": "0.3.6",
+  "minCoreVersion": "v0.19.0",
   "permissions": ["db.read", "db.write", "events.subscribe"],
   "backend": {
     "eventSubscriptions": ["task.deleted"],
@@ -15,9 +15,9 @@
           { "name": "optionalAuthn" },
           { "name": "requireFreshPassword" },
           {
-            "name": "requirePermissions",
+            "name": "requireActions",
             "scope": "project",
-            "permissions": ["tasks.read"]
+            "actions": ["tasks:read"]
           }
         ]
       },
@@ -28,9 +28,9 @@
           { "name": "optionalAuthn" },
           { "name": "requireFreshPassword" },
           {
-            "name": "requirePermissions",
+            "name": "requireActions",
             "scope": "project",
-            "permissions": ["tasks.write"]
+            "actions": ["tasks:write"]
           }
         ]
       },
@@ -41,9 +41,9 @@
           { "name": "optionalAuthn" },
           { "name": "requireFreshPassword" },
           {
-            "name": "requirePermissions",
+            "name": "requireActions",
             "scope": "project",
-            "permissions": ["tasks.read"]
+            "actions": ["tasks:read"]
           }
         ]
       },
@@ -54,9 +54,9 @@
           { "name": "optionalAuthn" },
           { "name": "requireFreshPassword" },
           {
-            "name": "requirePermissions",
+            "name": "requireActions",
             "scope": "project",
-            "permissions": ["tasks.write"]
+            "actions": ["tasks:write"]
           }
         ]
       },
@@ -67,9 +67,9 @@
           { "name": "optionalAuthn" },
           { "name": "requireFreshPassword" },
           {
-            "name": "requirePermissions",
+            "name": "requireActions",
             "scope": "project",
-            "permissions": ["tasks.write"]
+            "actions": ["tasks:write"]
           }
         ]
       }
