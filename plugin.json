@@ -2,8 +2,8 @@
   "id": "com.paca.bdd",
   "displayName": "BDD Scenarios",
   "description": "Adds Given/When/Then BDD acceptance criteria to tasks.",
-  "version": "0.3.6",
-  "minCoreVersion": "v0.19.0",
+  "version": "0.3.7",
+  "minCoreVersion": "v0.20.0",
   "permissions": ["db.read", "db.write", "events.subscribe"],
   "backend": {
     "eventSubscriptions": ["task.deleted"],
@@ -91,6 +91,9 @@
   },
   "skills": {
     "baseUrl": "/plugins-skills/com.paca.bdd",
-    "names": ["paca-bdd-scenarios"]
+    "names": ["paca-bdd-scenarios"],
+    "routes": [
+      {"skill": "paca-bdd-scenarios", "when": "Write, review or verify Given/When/Then acceptance scenarios on a task"}
+    ]
   }
 }
